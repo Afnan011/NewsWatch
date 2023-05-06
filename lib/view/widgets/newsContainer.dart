@@ -18,7 +18,6 @@ class newsContainer extends StatelessWidget {
   });
 
 
-
   @override
   Widget build(BuildContext context) {
 
@@ -26,7 +25,7 @@ class newsContainer extends StatelessWidget {
 
     void initNewsDesc() {
       try{
-        newsDescription =  newsDesc.length > 250 ? newsDesc.toString().substring(0, 250) :
+        newsDescription =  newsDesc.length > 1000 ? newsDesc.toString().substring(0, 1000) :
         "${newsDesc.toString().substring(0, newsDesc.length - 15)}...";
 
         if(newsDescription.startsWith("<li>")){
@@ -42,79 +41,86 @@ class newsContainer extends StatelessWidget {
 
 
     return SafeArea(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              FadeInImage.assetNetwork(
-                height: 250,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.cover,
-                placeholder: "assets/loading.gif",
-                image: imgUrl,
-            ),
-
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Column(
-                children: [
-                  const SizedBox(height: 10),
-
-                  Text(
-                    newsHead.length > 60 ? "${newsHead.substring(0, 60)}..." : newsHead,
-
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 26,
-                    ),
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  Text(
-                    newsContent,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Colors.black38,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-
-                  Text(
-                    newsDescription,
-
-                    style: const TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
+        child: InkWell(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => DetailedViewPage(newsUrl: newsUrl)));
+          },
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              children: [
+                FadeInImage.assetNetwork(
+                  height: 300,
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.cover,
+                  placeholder: "assets/loading.gif",
+                  image: imgUrl,
               ),
-            ),
 
-            const Spacer(),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => DetailedViewPage(newsUrl: newsUrl)
-                          ));
-                        },
-                        child: const Text("Read More")
+                    Text(
+                      newsHead.length > 60 ? "${newsHead.substring(0, 60)}..." : newsHead,
+
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 26,
+                      ),
                     ),
-                  ),
-                ],
-            ),
 
-            const SizedBox(height: 20),
+                    const SizedBox(height: 30),
 
-            ],
+                    Text(
+                      newsContent,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.black38,
+                      ),
+                    ),
+
+
+                    const SizedBox(height: 30),
+
+                    Text(
+                      newsDescription,
+
+                      style: const TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const Spacer(),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => DetailedViewPage(newsUrl: newsUrl)
+                            ));
+                          },
+                          child: const Text("Read More")
+                      ),
+                    ),
+                  ],
+              ),
+
+              const SizedBox(height: 20),
+
+              ],
       ),
-    ));
+    ),
+        ));
   }
 
 

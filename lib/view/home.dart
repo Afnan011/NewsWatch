@@ -21,18 +21,22 @@ class _HomeScreenState extends State<HomeScreen> {
   );
 
   bool isLoading = true;
+  List<NewsArticle> articlesList = [];
 
   getNews() async {
     article = await FetchNews.fetchNews();
     setState(() {
       isLoading = false;
+      articlesList.add(article);
     });
   }
 
   @override
   void initState() {
     super.initState();
-    getNews();
+    for (int i = 0; i < 10; i++) {
+      getNews();
+    }
   }
 
   @override
@@ -40,16 +44,21 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: PageView.builder(
         scrollDirection: Axis.vertical,
+        itemCount: articlesList.length,
         onPageChanged: (value) {
-          getNews();
           setState(() {
-            isLoading = false;
+            getNews();
           });
         },
         itemBuilder: (context, index) {
 
-          return isLoading ? const Center(child: CircularProgressIndicator()) :
-
+          NewsArticle article = articlesList[index];
+          if(article.newsHead == "--" || article.newsDesc == "--" || article.newsContent == "--") {
+            index++;
+          }
+          return isLoading
+              ? const Center(child: CircularProgressIndicator(color: Colors.black87,))
+              :
           newsContainer(
                   imgUrl: article.imgUrl,
                   newsHead: article.newsHead,

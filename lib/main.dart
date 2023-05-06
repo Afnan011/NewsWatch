@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_watch/view/home.dart';
-import 'package:news_watch/view/spashScreen.dart';
+import 'package:news_watch/view/splashScreen.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 
@@ -20,6 +20,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'News Watch',
       theme: ThemeData(
         primarySwatch: Colors.blue,
