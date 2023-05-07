@@ -25,8 +25,8 @@ class newsContainer extends StatelessWidget {
 
     void initNewsDesc() {
       try{
-        newsDescription =  newsDesc.length > 1000 ? newsDesc.toString().substring(0, 1000) :
-        "${newsDesc.toString().substring(0, newsDesc.length - 15)}...";
+      newsDescription =  newsDesc.length > 1000 ? newsDesc.toString().substring(0, 1000) :
+          newsDesc.length < 100 ? newsDesc : "${newsDesc.toString().substring(0, newsDesc.length - 15)}...";
 
         if(newsDescription.startsWith("<li>")){
           newsDescription = newsDescription.substring(4, newsDescription.length);
@@ -38,7 +38,6 @@ class newsContainer extends StatelessWidget {
     }
 
     initNewsDesc();
-
 
     return SafeArea(
         child: InkWell(

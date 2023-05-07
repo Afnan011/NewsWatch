@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'dart:math';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:news_watch/model/newsArticle.dart';
 
 
 class FetchNews{
 
-   static String API_KEY = "41febe3aa2f34efdb89953f29f3bc3cd";
+   static String API_KEY = "7108a4e3ac0744428ae7355033095b05";
 
    static List sourcesId = [
      "abc-news",
@@ -61,12 +62,22 @@ class FetchNews{
     ));
 
     Map dataBody = jsonDecode(response.body);
-    List articles = dataBody["articles"];
+    // if(dataBody["status"] == "error")
+    //   {
+    //     print('API Limit Reached!');
+    //
+    //     return NewsArticle.isError();
+    //   }
+    // else{
+      List articles = dataBody["articles"];
 
-    final randomArticle = Random();
-    var currentArticle = articles[randomArticle.nextInt(articles.length)];
+        final randomArticle = Random();
+        var currentArticle = articles[randomArticle.nextInt(articles.length)];
 
-    return NewsArticle.fromAPItoApp(currentArticle);
+        return NewsArticle.fromAPItoApp(currentArticle);
+
+
+
 
   }
 

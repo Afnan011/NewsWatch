@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_watch/controller/fetchNews.dart';
 import 'package:news_watch/model/newsArticle.dart';
-import 'package:news_watch/view/selectCategoryScreen.dart';
-import 'package:news_watch/view/sourceSreen.dart';
-import 'package:news_watch/view/widgets/bottomNav.dart';
 import 'package:news_watch/view/widgets/newsContainer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -28,10 +25,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   getNews() async {
     article = await FetchNews.fetchNews();
+
     setState(() {
       isLoading = false;
-      if (!articlesList.contains(article)) {
-        articlesList.add(article);
+
+      if (article.newsHead == "--" || article.newsContent == "--" || article.newsDesc == "--") {
+        print("news head = ${article.newsHead} \n news content = ${article.newsContent} \n Description = ${article.newsDesc}");
+        getNews();
+      }
+      else{
+        if(!articlesList.contains(article)) {
+          articlesList.add(article);
+        }
       }
     });
   }
@@ -39,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 3; i++) {
       getNews();
     }
   }
@@ -50,9 +55,10 @@ class _HomeScreenState extends State<HomeScreen> {
       body: PageView.builder(
         scrollDirection: Axis.vertical,
         itemCount: articlesList.length,
-        onPageChanged: (value) {
+        onPageChanged: (index) {
           setState(() {
-            getNews();
+            // getNews();
+            // isLoading = true;
           });
         },
         itemBuilder: (context, index) {
@@ -68,7 +74,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   newsHead: article.newsHead,
                   newsContent: article.newsContent,
                   newsDesc: article.newsDesc,
-                  newsUrl: article.newsUrl);
+                  newsUrl: article.newsUrl
+              );
         },
       ),
     );
