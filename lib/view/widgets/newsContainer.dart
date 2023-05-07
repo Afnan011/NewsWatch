@@ -51,7 +51,7 @@ class newsContainer extends StatelessWidget {
             child: Column(
               children: [
                 FadeInImage.assetNetwork(
-                  height: 300,
+                  height: 100,
                   width: MediaQuery.of(context).size.width,
                   fit: BoxFit.cover,
                   placeholder: "assets/loading.gif",

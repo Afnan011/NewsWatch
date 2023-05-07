@@ -6,7 +6,7 @@ import 'package:news_watch/model/newsArticle.dart';
 
 class FetchNews{
 
-   static String API_KEY = "10c24baf380741cf8cdd984d594426b2";
+   static String API_KEY = "41febe3aa2f34efdb89953f29f3bc3cd";
 
    static List sourcesId = [
      "abc-news",

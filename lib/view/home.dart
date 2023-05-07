@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:news_watch/controller/fetchNews.dart';
 import 'package:news_watch/model/newsArticle.dart';
+import 'package:news_watch/view/selectCategoryScreen.dart';
+import 'package:news_watch/view/sourceSreen.dart';
+import 'package:news_watch/view/widgets/bottomNav.dart';
 import 'package:news_watch/view/widgets/newsContainer.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -27,14 +30,16 @@ class _HomeScreenState extends State<HomeScreen> {
     article = await FetchNews.fetchNews();
     setState(() {
       isLoading = false;
-      articlesList.add(article);
+      if (!articlesList.contains(article)) {
+        articlesList.add(article);
+      }
     });
   }
 
   @override
   void initState() {
     super.initState();
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 5; i++) {
       getNews();
     }
   }
@@ -51,15 +56,14 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
         itemBuilder: (context, index) {
-
           NewsArticle article = articlesList[index];
-          if(article.newsHead == "--" || article.newsDesc == "--" || article.newsContent == "--") {
-            index++;
-          }
+
           return isLoading
-              ? const Center(child: CircularProgressIndicator(color: Colors.black87,))
-              :
-          newsContainer(
+              ? const Center(
+                  child: CircularProgressIndicator(
+                  color: Colors.black87,
+                ))
+              : newsContainer(
                   imgUrl: article.imgUrl,
                   newsHead: article.newsHead,
                   newsContent: article.newsContent,
