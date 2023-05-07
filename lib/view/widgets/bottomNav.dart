@@ -41,12 +41,16 @@ class _BottomNavState extends State<BottomNav> {
         currentIndex: myIndex,
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home), label: "Home", tooltip: "Home"),
+              icon: Icon(Icons.newspaper),
+              label: "Top News",
+              tooltip: "Headlines"),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.source),
             label: "Sources",
             tooltip: "Sources",
           ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.category),
             label: "Categories",

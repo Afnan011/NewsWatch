@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:news_watch/view/detailView.dart';
 
 class newsContainer extends StatelessWidget {
@@ -16,6 +18,14 @@ class newsContainer extends StatelessWidget {
     required this.newsContent,
     required this.newsUrl,
   });
+
+  static final customCacheManager = CacheManager(
+    Config(
+      "123",
+      stalePeriod: const Duration(days: 2),
+      maxNrOfCacheObjects: 50,
+    )
+  );
 
 
   @override
@@ -49,13 +59,26 @@ class newsContainer extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Column(
               children: [
-                FadeInImage.assetNetwork(
+
+              //   FadeInImage.assetNetwork(
+              //     height: 100,
+              //     width: MediaQuery.of(context).size.width,
+              //     fit: BoxFit.cover,
+              //     placeholder: "assets/loading.gif",
+              //     image: imgUrl,
+              // ),
+
+                CachedNetworkImage(
+                  imageUrl: imgUrl,
                   height: 100,
                   width: MediaQuery.of(context).size.width,
                   fit: BoxFit.cover,
-                  placeholder: "assets/loading.gif",
-                  image: imgUrl,
-              ),
+                  // cacheManager: customCacheManager,
+
+                  placeholder: (context, url) => Image.asset("assets/loading.gif", fit: BoxFit.cover),
+
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
 
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
