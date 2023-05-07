@@ -27,7 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
     article = await FetchNews.fetchNews();
 
     setState(() {
-      isLoading = false;
 
       if (article.newsHead == "--" || article.newsContent == "--" || article.newsDesc == "--") {
         print("news head = ${article.newsHead} \n news content = ${article.newsContent} \n Description = ${article.newsDesc}");
@@ -38,7 +37,10 @@ class _HomeScreenState extends State<HomeScreen> {
           articlesList.add(article);
         }
       }
+      isLoading = false;
     });
+
+
   }
 
   @override
@@ -57,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
         itemCount: articlesList.length,
         onPageChanged: (index) {
           setState(() {
-            // getNews();
+            getNews();
             // isLoading = true;
           });
         },

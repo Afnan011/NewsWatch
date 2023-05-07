@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:news_watch/model/constant_sources.dart';
 
+import 'detailView.dart';
+
 class SourceScreen extends StatelessWidget {
   const SourceScreen({Key? key}) : super(key: key);
 
@@ -51,24 +53,52 @@ class SourceScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView.separated(
-          itemBuilder: (context, index) => buildCard(index),
-          separatorBuilder: (context, index) => const SizedBox(height: 10),
-          itemCount: listOfNewsChannel.length,
+      body: 
+      // ListView.separated(
+      //     itemBuilder: (context, index) => buildCard(index),
+      //     separatorBuilder: (context, index) => const SizedBox(height: 10),
+      //     itemCount: listOfNewsChannel.length,
+      // ),
+      
+      Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            itemCount: listOfNewsChannel.length,
+            itemBuilder: (context, index) => Card(
+              child: InkWell(
+                onTap: () {
+                  String newsUrl = listOfNewsChannel[index]['url']!;
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => DetailedViewPage(newsUrl: newsUrl)));
+                },
+                child: Container(
+                  decoration: const BoxDecoration(
+                      gradient: RadialGradient(
+                        radius: 1,
+                        colors: [Colors.black12,  Colors.black38],
+                      )),
+
+                  child: Center(
+                    child: Text(
+                      listOfNewsChannel[index]['name']!.toUpperCase(),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    // Image.asset("assets/channels/${listOfNewsChannel[index]['code']!}.png",
+                    // fit: BoxFit.cover,
+                    // ),
+
+                  ),
+                ),
+              ),
+            ),
+        ),
       ),
 
-
-      // ExpansionTile(
-      //   title: const Text('Channel'),
-      //   children: [
-      //     for (int i = 0; i < listOfNewsChannel.length; i++)
-      //       DropDownList(
-      //         call: () =>
-      //             getNews(channel: listOfNewsChannel[i]['code']),
-      //         name: listOfNewsChannel[i]['name']!.toUpperCase(),
-      //       ),
-      //   ],
-      // ),
+      
     );
 
 

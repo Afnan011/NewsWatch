@@ -1,0 +1,18 @@
+# flutter pub run flutter_launcher_icons
+flutter_launcher_icons:
+  image_path: "assets/app_icon.jpg"
+
+  android: "launcher_icon"
+#   image_path_android: "assets/icon/"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  # adaptive_icon_background: "assets/icon/background.png"
+  # adaptive_icon_foreground: "assets/icon/foreground.png"
+
+
+  web:
+    generate: true
+    image_path: "assets/app_icon.jpg"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+
+

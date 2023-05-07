@@ -45,22 +45,22 @@ class _DetailedViewPageState extends State<DetailedViewPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-              title: Text("NEWS"),
-              elevation: 0,
-              backgroundColor: Colors.grey,
-          ),
-          body: Stack(
-      children: [
-          WebViewWidget(
-            controller: controller,
-          ),
-          if (loadingPercentage < 100)
-            LinearProgressIndicator(
-              value: loadingPercentage / 100.0,
+            appBar: AppBar(
+              title: const Text("NEWS WATCH"),
+                elevation: 0,
+              backgroundColor: Colors.black87,
             ),
-      ],
-    ),
-        ));
+          body: Stack(
+            children: [
+                WebViewWidget(
+                controller: controller,
+              ),
+            if (loadingPercentage < 100)
+              LinearProgressIndicator(
+                value: loadingPercentage / 100.0,
+            ),
+        ],
+      ),
+    ));
   }
 }

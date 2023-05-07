@@ -19,13 +19,13 @@ class newsContainer extends StatelessWidget {
     required this.newsUrl,
   });
 
-  static final customCacheManager = CacheManager(
-    Config(
-      "123",
-      stalePeriod: const Duration(days: 2),
-      maxNrOfCacheObjects: 50,
-    )
-  );
+  // static final customCacheManager = CacheManager(
+  //   Config(
+  //     "123",
+  //     stalePeriod: const Duration(days: 2),
+  //     maxNrOfCacheObjects: 50,
+  //   )
+  // );
 
 
   @override
@@ -54,7 +54,7 @@ class newsContainer extends StatelessWidget {
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => DetailedViewPage(newsUrl: newsUrl)));
           },
-          child: Container(
+          child: SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: Column(
@@ -70,7 +70,7 @@ class newsContainer extends StatelessWidget {
 
                 CachedNetworkImage(
                   imageUrl: imgUrl,
-                  height: 100,
+                  height: 350,
                   width: MediaQuery.of(context).size.width,
                   fit: BoxFit.cover,
                   // cacheManager: customCacheManager,

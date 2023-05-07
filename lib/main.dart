@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:news_watch/view/home.dart';
 import 'package:news_watch/view/splashScreen.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:news_watch/view/widgets/bottomNav.dart';
@@ -32,7 +31,7 @@ class _MyAppState extends State<MyApp> {
         splashTransition: SplashTransition.fadeTransition,
         // pageTransitionType: ,
         backgroundColor: Colors.black38,
-        nextScreen: BottomNav(),
+        nextScreen: const BottomNav(),
       ),
     );
   }
